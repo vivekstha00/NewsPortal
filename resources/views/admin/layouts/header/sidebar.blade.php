@@ -5,13 +5,13 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-link text-white">Dashboard</a>
         </li>
         <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">News</a>
+            <a href="{{ route('admin.manage-news') }}" class="nav-link text-white">News</a>
         </li>
         <li class="nav-item mb-2">
             <a href="#" class="nav-link text-white">Categories</a>
         </li>
         <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">Users</a>
+            <a href="{{ route('admin.manage-user') }}" class="nav-link text-white">Users</a>
         </li>
     </ul>
 </div>

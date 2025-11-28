@@ -25,3 +25,15 @@ Route::get('/admin/dashboard', function () {
 Route::post('/admin/logout', function () {
     // logout logic
 })->name('admin.logout');
+
+// ADMIN: Manage News (placeholder)
+Route::get('/admin/manage-news', function () {
+    // pass an empty collection to avoid undefined variable errors until controller is implemented
+    return view('admin.pages.manage-news', ['news' => collect()]);
+})->name('admin.manage-news');
+
+// ADMIN: Manage Users (placeholder)
+Route::get('/admin/manage-user', function () {
+    // pass an empty collection to avoid undefined variable errors until controller is implemented
+    return view('admin.pages.manage-user', ['users' => collect()]);
+})->name('admin.manage-user');
