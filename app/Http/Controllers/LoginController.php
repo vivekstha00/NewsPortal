@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,21 +13,40 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        // Validate input
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('admin.dashboard');
+        // Attempt authentication
+        if (Auth::attempt($credentials)) {
+            // Regenerate session to prevent session fixation
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            // Redirect based on role
+            if ($user->role === 'admin') {
+                return redirect()->intended(route('admin.dashboard'));
+            } else {
+                return redirect()->intended(route('user.dashboard'));
+            }
         }
 
-        return back()->withErrors(['email' => 'Invalid login credentials']);
+        // Authentication failed
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email'));
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('login.form');
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
     }
 }

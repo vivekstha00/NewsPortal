@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('admin.layouts.header.index')
-
 <body class="bg-light">
-
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="card shadow-sm p-4" style="width: 380px;">
         <h4 class="text-center mb-4">Login</h4>
 
         @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         @if($errors->any())
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    <p class="mb-0">{{ $error }}</p>
-                @endforeach
-            </div>
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <p class="mb-0">{{ $error }}</p>
+            @endforeach
+        </div>
         @endif
 
         <form action="{{ route('admin.login.submit') }}" method="POST">
@@ -27,12 +25,25 @@
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" value="{{ old('email') }}" required class="form-control">
+                <input type="email"
+                       name="email"
+                       value="{{ old('email') }}"
+                       required
+                       class="form-control @error('email') is-invalid @enderror">
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="password" required class="form-control">
+                <input type="password"
+                       name="password"
+                       required
+                       class="form-control @error('password') is-invalid @enderror">
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Login</button>
@@ -43,6 +54,5 @@
         </p>
     </div>
 </div>
-
 </body>
 </html>
