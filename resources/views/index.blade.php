@@ -29,7 +29,7 @@
     <span class="navbar-brand mb-0 h1 fw-bold">NewsPortal</span>
 
     <div>
-        <a href="{{ route('admin.login') }}" class="btn btn-outline-primary btn-sm me-2">Admin Login</a>
+        <a href="{{ route('admin.login') }}" class="btn btn-outline-primary btn-sm me-2">Login</a>
         <a href="{{ route('register.form') }}" class="btn btn-primary btn-sm">Sign Up</a>
     </div>
 </nav>
